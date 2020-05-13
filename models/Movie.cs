@@ -1,13 +1,19 @@
+using BlockBuster.Interfaces;
+
 namespace BlockBuster.Models
 {
-  public class Movie
+  public class Movie : BaseEntity, IPurchaseable
   {
-    public string Title { get; private set; }
     public bool Available { get; set; }
-    public Movie(string title)
+    public decimal Price { get; private set; }
+    public Movie(string title) : base(title)
     {
-      Title = title;
       Available = true;
+    }
+
+    public void Purchase()
+    {
+      System.Console.WriteLine($"Purchased {Title} for 3 days");
     }
   }
 }

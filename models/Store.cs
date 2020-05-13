@@ -1,18 +1,21 @@
 using System;
 using System.Collections.Generic;
+using BlockBuster.Interfaces;
 
 namespace BlockBuster.Models
 {
-  public class Store
+  public class Store : BaseEntity
   {
     public List<Movie> Movies { get; private set; }
+    public List<IPurchaseable> ShoppingCart { get; set; }
 
-    public string Title { get; private set; }
+    public Shop Shop { get; private set; }
 
-    public Store(string title)
+    public Store(string title) : base(title)
     {
-      Title = title;
       Movies = new List<Movie>();
+      Shop = new Shop();
+
     }
 
     public void Setup()
@@ -22,6 +25,21 @@ namespace BlockBuster.Models
       Movie donnieDarko = new Movie("Donnie Darko");
       Movies.Add(lotr);
       Movies.Add(donnieDarko);
+      ShoppingCart = new List<IPurchaseable>();
+      Item nickelBackCD = new Item("NickelBack CD", 1, 50.00m);
+      Movie titanic = new Movie("Titanic");
+      ShoppingCart.Add(nickelBackCD);
+      ShoppingCart.Add(titanic);
+
+      foreach (IPurchaseable cartItem in ShoppingCart)
+      {
+        cartItem.Purchase();
+      }
+    }
+
+    public void VisitShop()
+    {
+      Shop.VisitShop();
     }
 
     internal void PrintMovies()

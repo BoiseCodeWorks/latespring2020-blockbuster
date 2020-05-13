@@ -24,7 +24,7 @@ namespace BlockBuster
 
     private void MakeSelection()
     {
-      System.Console.WriteLine("What would you like to do? Rent / Return / Quit");
+      System.Console.WriteLine("What would you like to do? Rent / Return / Shop / Quit");
       string choice = Console.ReadLine();
       switch (choice.ToLower())
       {
@@ -38,6 +38,9 @@ namespace BlockBuster
           break;
         case "return":
           Store.ReturnMovie();
+          break;
+        case "shop":
+          Store.VisitShop();
           break;
         default:
           System.Console.WriteLine("Invalid Selection");
